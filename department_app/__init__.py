@@ -14,7 +14,8 @@ app.config['SECRET_KEY'] = SECRET_KEY
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login_manager = LoginManager(app)
-
+login_manager.login_view = 'page.login'
+login_manager.init_app(app)
 from department_app.views import page
 
 app.register_blueprint(page, url_prefix='/')
