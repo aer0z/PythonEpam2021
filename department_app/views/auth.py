@@ -52,12 +52,11 @@ def sign_up():
             flash('First name must be greater than 1 character.', category='error')
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
-        elif len(password1) < 7:
+        elif len(password1) < 6:
             flash('Password must be at least 7 characters.', category='error')
         else:
             psw = generate_password_hash(password1, method='sha256')
             auth_service.new_user(email, psw, first_name)
-            login_user(user, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('page.home'))
+            return redirect(url_for('page.login'))
     return render_template('sign_up.html', user=current_user)
