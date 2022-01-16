@@ -1,0 +1,18 @@
+{% extends 'base.html'%}
+{% block title %}Add department{% endblock %}
+{% block content%}
+<div class="container mt-5">
+        <h1>Add department</h1>
+        <form method="post" class="row g-3 needs-validation">
+            <div class="col-md-2">
+                <input type="text" name="department" id="department" class="form-control" placeholder="Input new department">
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary" type="submit">Add</button>
+            </div>
+            <div>
+                <br>
+            </div>
+        </form>
+</div>
+{% endblock %}

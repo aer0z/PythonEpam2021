@@ -7,7 +7,4 @@ from . import page
 @page.route('/employees/<ids>', methods=['GET', 'POST'])
 @login_required
 def employees(ids):
-    return render_template('employees.html',user=current_user)
-
-
-
+    return render_template('employees.html', user=current_user)
