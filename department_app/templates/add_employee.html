@@ -1,0 +1,44 @@
+{% extends 'base.html'%}
+{% block title %}Add employee{% endblock %}
+{% block content%}
+<div class="container mt-5">
+    <h1>Add employee</h1>
+    <form method="post" class="row g-3 needs-validation" novalidate>
+        <div class="col-md-2">
+            <label for="validationCustom01" class="form-label">Full name</label>
+            <input type="text" name="name" class="form-control" id="validationCustom01" placeholder="John Smith"
+                   required>
+        </div>
+        <div class="col-md-2">
+            <label for="validationCustom04" class="form-label">Department</label>
+            <select name="department" class="form-select" id="validationCustom04" required>
+                <option selected disabled value="">Choose department</option>
+                {% for department in departments %}
+                    <option value="{{ department.uuid }}">{{ department.department}}</option>
+                {% endfor %}
+            </select>
+            <div class="invalid-feedback">
+                Please select a valid state.
+            </div>
+        </div>
+        <div class="col-md-2">
+            <label for="validationCustom05" class="form-label">Salary</label>
+            <input name="salary" type="text" class="form-control" id="validationCustom05" placeholder="15000" required>
+            <div class="invalid-feedback">
+                Please provide a valid salary.
+            </div>
+        </div>
+
+
+        <div class="col-md-2">
+            <label for="validationCustom05" class="form-label">Date of birth</label>
+            <input name="birth_date" id="validationCustom06" type="date" class="form-control">
+        </div>
+
+
+        <div class="col-12">
+            <button class="btn btn-primary" type="submit">Add employee</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -10,7 +10,7 @@
         <tr>
             <th>Department</th>
             <th>Average salary</th>
-            <th></th>
+            <th>Number of employees</th>
         </tr>
         </thead>
         <tbody>
@@ -18,12 +18,9 @@
         <tr>
             <td>{{ department.department }}</td>
             <td>{{ department.average_salary }}</td>
+            <td>{{ department.number_of_employees }}</td>
             <td>
-                <div class="department_button">
-                    <p>
-                        <input type="button" data-id="{{ department.uuid }}" class="btn btn-danger" value="Delete">
-                    </p>
-                </div>
+                <input type="button" data-id="{{ department.uuid }}" class="btn btn-danger" value="Delete">
             </td>
         </tr>
         {% endfor %}
@@ -33,7 +30,7 @@
                 <br/>
                 <p>Please confirm delete department</p>
                 <input type="submit" class="btn btn-primary" value="Yes">
-                <input type="button" class="btn btn-secondary" value="Cancel">
+                <input type="button" class="btn btn-primary" value="Cancel">
             </form>
         </div>
         </tbody>
