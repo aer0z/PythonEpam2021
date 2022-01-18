@@ -5,8 +5,7 @@ from uuid import uuid4
 
 class Employee(db.Model):
     """
-    Class is descendant of db.Model.
-    It creates table Employees in db.
+    Employee model for db.
     """
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)

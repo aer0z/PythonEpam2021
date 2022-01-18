@@ -1,9 +1,17 @@
+"""
+CRUD operations for Employee
+"""
+
 from department_app import db
 from department_app.models.employee_model import Employee
 from datetime import datetime, date
 
 
-def get_all_employees() -> list:
+def get_all_employees():
+    """
+    Function that get all employees from db and calculate their age
+    :return: list of employees
+    """
     employees = db.session.query(Employee).all()
     today = date.today()
     for employee in employees:
@@ -14,6 +22,14 @@ def get_all_employees() -> list:
 
 
 def update_employee(emp_uuid, name, salary, birth_date, department):
+    """
+     Change existing employee entry.
+    :param emp_uuid: uuid of employee
+    :param name: name of employee
+    :param salary: salary of employee
+    :param birth_date: birthday of employee
+    :param department: uuid of employees department
+    """
     employee = Employee.query.filter_by(uuid=emp_uuid).first_or_404(
         description='Not found. Entry with specified ID is missing.')
     employee.name = name
@@ -25,6 +41,13 @@ def update_employee(emp_uuid, name, salary, birth_date, department):
 
 
 def add_new_employee(name, salary, birth_date, department):
+    """
+    Add new employee to db
+    :param name: name of employee
+    :param salary: salary of employee
+    :param birth_date: birthday of employee
+    :param department: uuid of employees department
+    """
     employee = Employee(name=name,
                         salary=salary,
                         birth_date=birth_date,
@@ -40,6 +63,13 @@ def add_new_employee(name, salary, birth_date, department):
 
 
 def get_employee_with_params(*, dep_uuid=None, first_date=None, second_date=None):
+    """
+       Get employees born on a certain date or in the period between dates.
+       :param dep_uuid: id of department
+       :param first_date: date in format yyyy-mm-dd
+       :param second_date: date in format yyyy-mm-dd
+       :return: list pf employees
+       """
     today = date.today()
     if first_date:
         first_date = datetime.strptime(first_date, "%Y-%m-%d").date()
@@ -71,6 +101,10 @@ def get_employee_with_params(*, dep_uuid=None, first_date=None, second_date=None
 
 
 def delete_employee(emp_uuid):
+    """
+    Delete employye from db
+    :param emp_uuid: uuid of employee to delete
+    """
     employee = Employee.query.filter_by(uuid=emp_uuid).first_or_404(
         description='Not found. Entry with specified ID is missing.')
     db.session.delete(employee)

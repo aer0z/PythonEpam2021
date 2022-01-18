@@ -1,3 +1,7 @@
+"""
+Initialize page Blueprint and import all submodules from views.
+"""
+
 from flask import Blueprint
 
 page = Blueprint('page', __name__)

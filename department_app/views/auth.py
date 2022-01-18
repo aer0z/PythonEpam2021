@@ -1,3 +1,7 @@
+"""
+Module for logic of login and registration
+"""
+
 from . import page
 from flask import render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -8,11 +12,19 @@ from flask_login import login_user, logout_user, login_required, current_user
 @page.route('/')
 @login_required
 def home():
+    """
+    Render main page
+    :return: main page
+    """
     return render_template("home.html", user=current_user)
 
 
 @page.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Render login page
+    :return: login page
+    """
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -32,12 +44,20 @@ def login():
 @page.route('/logout')
 @login_required
 def logout():
+    """
+    Logout user
+    :return: redirect to main page
+    """
     logout_user()
     return redirect(url_for('page.login'))
 
 
 @page.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
+    """
+    Render registration page
+    :return: registration page
+    """
     if request.method == 'POST':
         email = request.form.get('email')
         first_name = request.form.get('firstName')

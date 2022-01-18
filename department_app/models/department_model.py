@@ -3,6 +3,9 @@ from uuid import uuid4
 
 
 class Department(db.Model):
+    """
+       Department model for db.
+    """
     __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     uuid = db.Column(db.String(length=36), unique=True, nullable=False, default=uuid4)

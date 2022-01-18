@@ -1,3 +1,6 @@
+"""
+Start app
+"""
 from department_app import db, app
 
 if __name__ == '__main__':

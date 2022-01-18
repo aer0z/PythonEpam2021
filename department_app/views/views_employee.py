@@ -1,3 +1,7 @@
+"""
+Module for logic of pages that starts with /employees
+"""
+
 from flask import render_template, request, redirect, url_for
 from flask_login import login_required, current_user
 from department_app.service import employee_service
@@ -9,6 +13,11 @@ from . import page
 @page.route('/employees/<dep_uuid>', methods=['GET', 'POST'])
 @login_required
 def employees(dep_uuid):
+    """
+    Render employees page
+    :param dep_uuid: uuid of department to get it's employees
+    :return: employees page
+    """
     if request.method == 'POST':
         uuid = request.form['uuid']
         name = request.form['name']
@@ -32,6 +41,10 @@ def employees(dep_uuid):
 @page.route('/employees/add/', methods=['GET', 'POST'])
 @login_required
 def add_employee():
+    """
+    Page that add employee to db
+    :return: render page
+    """
     if request.method == 'POST':
         name = request.form['name']
         salary = request.form['salary']
@@ -46,5 +59,10 @@ def add_employee():
 @page.route('/employees/delete/<emp_uuid>', methods=['POST'])
 @login_required
 def delete_employee(emp_uuid):
+    """
+    Delete department from db
+    :param emp_uuid: uuid of employee to delete
+    :return: redirect to employees page
+    """
     employee_service.delete_employee(emp_uuid)
     return redirect(url_for('page.employees'))
