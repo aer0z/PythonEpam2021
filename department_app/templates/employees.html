@@ -45,32 +45,34 @@
         </tbody>
     </table>
 </div>
-<div id="window_emp" style="display: none">
-    <div class="x"></div>
-    <form action="" method="post">
+<div id="window_emp" style="display: none" class="container mt-5">
+    <form action="" method="post" class="row g-3 needs-validation">
+    <div class="col-md-2">
         <input type="hidden" id="emp_id" name="uuid">
-        <h2 class="ed_department_title"><label id="title_add_emp"><sup>Name: </sup><input type="text"
-                                                                                          class="input_name"
-                                                                                          name="name"
-                                                                                          placeholder="Name Surname"></label>
-        </h2>
-        <div class="employee_text_block">
-            <div class="ed_textcols-item">
-                <p class="emp_text_center"><label>Salary: <input type="number" id="salary" class="emp_inp"
-                                                                 name="salary"></label></p>
-            </div>
-            <div class="ed_textcols-item">
-                <p class="emp_text_right"><label>Department: <select name="department">
+        <label for="validationCustom01" class="form-label">Full name</label>
+        <input type="text"
+               class="form-control"
+               name="name"
+               placeholder="Name Surname">
+    </div>
+        <div class="col-md-2">
+            <label for="validationCustom05" class="form-label">Salary</label>
+            <input name="salary" type="text" class="form-control" id="validationCustom05" placeholder="15000" required>
+        </div>
+            <div class="col-md-2">
+                <label class="form-select">Department: <select name="department">
                     {% for department in departments %}
                     <option value="{{ department.uuid }}">{{ department.department }}</option>
                     {% endfor %}
                 </select></label></p>
-                <p class="emp_text_left"><label>Birthday: <input type="date" id="birthday" class="emp_inp_date"
-                                                                 name="birth_date"></label>
-                </p>
             </div>
+            <div class="col-md-2">
+                <label>Birthday: <input type="date" id="birthday" class="form-control"
+                                                                 name="birth_date"></label>
+            </div>
+        <div class="col-12">
+            <input type="submit" class="btn btn-primary" value="Save">
         </div>
-        <input type="submit" class="save" value="Save">
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
