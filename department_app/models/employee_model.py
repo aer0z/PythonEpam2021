@@ -15,3 +15,18 @@ class Employee(db.Model):
     salary = db.Column(db.Float, nullable=False)
     department_uuid = db.Column(db.String(length=36), db.ForeignKey('department.uuid'))
     department = db.relationship(Department, backref='employee')
+
+    def to_dict(self):
+        """
+        Serializer that returns a dictionary from its fields.
+        :return: the employee in json format
+        """
+        return {
+            'uuid': self.uuid,
+            'name': self.name,
+            'salary': self.salary,
+            'date_of_birth': str(self.birth_date),
+            'department_uuid': self.department_uuid,
+            'age': self.age,
+            'department': str(self.department)
+        }

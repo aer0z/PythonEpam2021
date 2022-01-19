@@ -21,6 +21,20 @@ def get_all_employees():
     return employees
 
 
+def get_one_employee(emp_uuid):
+    """""
+    Select one employee from database by id and calculate age.
+    :param emp_uuid: uuid of employee
+    :return: employee object
+    """""
+    employee = Employee.query.filter_by(uuid=emp_uuid).first_or_404(
+        description='Not found. Entry with specified ID is missing.')
+    today = date.today()
+    born = employee.birth_date
+    employee.age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
+    return employee
+
+
 def update_employee(emp_uuid, name, salary, birth_date, department):
     """
      Change existing employee entry.
@@ -108,4 +122,27 @@ def delete_employee(emp_uuid):
     employee = Employee.query.filter_by(uuid=emp_uuid).first_or_404(
         description='Not found. Entry with specified ID is missing.')
     db.session.delete(employee)
+    db.session.commit()
+
+
+def update_employee_patch(emp_uuid, *, name=None, salary=None, birthday=None, department=None):
+    """
+    Change existing employee entry without overwriting unspecified fields with None.
+    :param emp_uuid: uuid of employee
+    :param name: full name of employee
+    :param salary: salary of employee
+    :param birthday: date of birth of employee in format yyyy-mm-dd
+    :param department: uuid of employee's department
+    """
+    employee = Employee.query.filter_by(uuid=emp_uuid).first_or_404(
+        description='Not found. Entry with specified ID is missing.')
+    if name:
+        employee.name = name
+    if salary:
+        employee.salary = salary
+    if birthday:
+        employee.birth_date = birthday
+    if department:
+        employee.department_uuid = department
+    db.session.add(employee)
     db.session.commit()

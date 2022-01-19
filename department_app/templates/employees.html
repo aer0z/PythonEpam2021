@@ -29,6 +29,8 @@
             <td>{{ employee.birth_date}}</td>
             <td>
                 <input type="button" data-id="{{employee.uuid }}" class="btn btn-danger" value="Delete">
+                <input type="button" class="btn btn-warning" data-id="{{ employee.uuid }}"
+                       data-dep="{{ employee.department_uuid }}" value="Edit">
             </td>
 
         </tr>
@@ -43,7 +45,34 @@
         </tbody>
     </table>
 </div>
-
+<div id="window_emp" style="display: none">
+    <div class="x"></div>
+    <form action="" method="post">
+        <input type="hidden" id="emp_id" name="uuid">
+        <h2 class="ed_department_title"><label id="title_add_emp"><sup>Name: </sup><input type="text"
+                                                                                          class="input_name"
+                                                                                          name="name"
+                                                                                          placeholder="Name Surname"></label>
+        </h2>
+        <div class="employee_text_block">
+            <div class="ed_textcols-item">
+                <p class="emp_text_center"><label>Salary: <input type="number" id="salary" class="emp_inp"
+                                                                 name="salary"></label></p>
+            </div>
+            <div class="ed_textcols-item">
+                <p class="emp_text_right"><label>Department: <select name="department">
+                    {% for department in departments %}
+                    <option value="{{ department.uuid }}">{{ department.department }}</option>
+                    {% endfor %}
+                </select></label></p>
+                <p class="emp_text_left"><label>Birthday: <input type="date" id="birthday" class="emp_inp_date"
+                                                                 name="birth_date"></label>
+                </p>
+            </div>
+        </div>
+        <input type="submit" class="save" value="Save">
+    </form>
+</div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $('input.btn-danger').click(function () {
@@ -54,6 +83,24 @@
     $('input.btn-secondary').click(function () {
         $('div.delete_window').hide();
         $('.b-popup').hide();
+    });
+    $(document).ready(function () {
+        $('body').on('click', '.btn-warning', function () {
+            const a = $(`#${this.dataset.id}`);
+            const title = a.find('.department_title').html();
+            let list = [];
+            for (let i of a.find('b')) {
+                list.push(i.innerHTML);
+            }
+            $('input#emp_id').val(this.dataset.id);
+            $('.input_name').val(title);
+            $('.emp_inp_date').val(list[1]);
+            $('#salary').val(list[2]);
+            $('.title_add_emp').val(title);
+            $(`select option[value=${this.dataset.dep}]`).prop('selected', true);
+            $('div#window_emp').show();
+            $('.b-popup').show();
+        })
     });
 </script>
 {% endblock %}
