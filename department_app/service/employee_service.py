@@ -76,42 +76,7 @@ def add_new_employee(name, salary, birth_date, department):
     return emp
 
 
-def get_employee_with_params(*, dep_uuid=None, first_date=None, second_date=None):
-    """
-       Get employees born on a certain date or in the period between dates.
-       :param dep_uuid: id of department
-       :param first_date: date in format yyyy-mm-dd
-       :param second_date: date in format yyyy-mm-dd
-       :return: list pf employees
-       """
-    today = date.today()
-    if first_date:
-        first_date = datetime.strptime(first_date, "%Y-%m-%d").date()
-        if second_date:
-            second_date = datetime.strptime(second_date, "%Y-%m-%d").date()
-            if dep_uuid:
-                employees = Employee.query.filter(
-                    Employee.birth_date.between(first_date, second_date)).filter_by(
-                    department_uuid=dep_uuid).all()
-            else:
-                employees = Employee.query.filter(
-                    Employee.birth_date.between(first_date, second_date)).all()
-        else:
-            if dep_uuid:
-                employees = Employee.query.filter_by(
-                    birth_date=first_date).filter_by(department_uuid=dep_uuid).all()
-            else:
-                employees = Employee.query.filter_by(birth_date=first_date).all()
-    else:
-        if dep_uuid:
-            employees = Employee.query.filter_by(department_uuid=dep_uuid).all()
-        else:
-            employees = Employee.query.all()
-    for employee in employees:
-        born = employee.birth_date
-        age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
-        employee.age = age
-    return employees
+
 
 
 def delete_employee(emp_uuid):

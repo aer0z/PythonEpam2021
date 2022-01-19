@@ -3,7 +3,7 @@ import datetime
 from flask import request
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
-from department_app.service.employee_service import get_employee_with_params, get_all_employees, get_one_employee, \
+from department_app.service.employee_service import get_all_employees, get_one_employee, \
     update_employee_patch, update_employee, delete_employee, add_new_employee
 
 

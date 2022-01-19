@@ -30,10 +30,6 @@ def employees(dep_uuid):
                                          birth_date=birth_date,
                                          department=department)
     deps = get_all_departments()
-    if dep_uuid:
-        employees_list = employee_service.get_employee_with_params(dep_uuid=dep_uuid)
-        return render_template('employees.html',
-                               employees=employees_list, departments=deps, user=current_user)
     employees_list = employee_service.get_all_employees()
     return render_template('employees.html', employees=employees_list, departments=deps, user=current_user)
 
