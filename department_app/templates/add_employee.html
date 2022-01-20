@@ -5,13 +5,13 @@
     <h1>Add employee</h1>
     <form method="post" class="row g-3 needs-validation" novalidate>
         <div class="col-md-2">
-            <label for="validationCustom01" class="form-label">Full name</label>
-            <input type="text" name="name" class="form-control" id="validationCustom01" placeholder="Name Surname"
+            <label class="form-label">Full name</label>
+            <input type="text" name="name" class="form-control" placeholder="Name Surname"
                    required>
         </div>
         <div class="col-md-2">
-            <label for="validationCustom04" class="form-label">Department</label>
-            <select name="department" class="form-select" id="validationCustom04" required>
+            <label class="form-label">Department</label>
+            <select name="department" class="form-select" required>
                 <option selected disabled value="">Choose department</option>
                 {% for department in departments %}
                     <option value="{{ department.uuid }}">{{ department.department}}</option>
@@ -22,8 +22,8 @@
             </div>
         </div>
         <div class="col-md-2">
-            <label for="validationCustom05" class="form-label">Salary</label>
-            <input name="salary" type="text" class="form-control" id="validationCustom05" placeholder="15000" required>
+            <label class="form-label">Salary</label>
+            <input name="salary" type="text" class="form-control" placeholder="15000" required>
             <div class="invalid-feedback">
                 Please provide a valid salary.
             </div>
@@ -31,8 +31,8 @@
 
 
         <div class="col-md-2">
-            <label for="validationCustom05" class="form-label">Date of birth</label>
-            <input name="birth_date" id="validationCustom06" type="date" class="form-control">
+            <label class="form-label">Date of birth</label>
+            <input name="birth_date" type="date" class="form-control">
         </div>
 
 

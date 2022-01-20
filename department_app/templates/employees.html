@@ -56,8 +56,8 @@
                    placeholder="Name Surname">
         </div>
         <div class="col-md-2">
-            <label for="validationCustom05" class="form-label">Salary</label>
-            <input name="salary" type="text" class="form-control" id="validationCustom05" placeholder="15000" required>
+            <label class="form-label">Salary</label>
+            <input name="salary" type="text" class="form-control" placeholder="15000" required>
         </div>
         <div class="col-md-2">
             <label class="form-select">Department: <select name="department">
@@ -80,29 +80,15 @@
     $('input.btn-danger').click(function () {
         $('form#del').attr('action', `/employees/delete/${this.dataset.id}`);
         $('div.delete_window').show();
-        $('.b-popup').show();
+
     });
     $('input.btn-secondary').click(function () {
         $('div.delete_window').hide();
-        $('.b-popup').hide();
     });
-    $(document).ready(function () {
-        $('body').on('click', '.btn-warning', function () {
-            const a = $(`#${this.dataset.id}`);
-            const title = a.find('.department_title').html();
-            let list = [];
-            for (let i of a.find('b')) {
-                list.push(i.innerHTML);
-            }
-            $('input#emp_id').val(this.dataset.id);
-            $('.input_name').val(title);
-            $('.emp_inp_date').val(list[1]);
-            $('#salary').val(list[2]);
-            $('.title_add_emp').val(title);
-            $(`select option[value=${this.dataset.dep}]`).prop('selected', true);
-            $('div#window_emp').show();
-            $('.b-popup').show();
-        })
+    $('input.btn-warning').click(function () {
+        $('input#emp_id').val(this.dataset.id);
+        $(`select option[value=${this.dataset.dep}]`).prop('selected', true);
+        $('div#window_emp').show();
     });
 </script>
 {% endblock %}
