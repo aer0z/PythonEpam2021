@@ -11,3 +11,6 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(32), unique=True)
     password = db.Column(db.String(256))
     first_name = db.Column(db.String(50))
+
+    def __repr__(self):
+        return str(self.first_name)

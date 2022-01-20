@@ -36,14 +36,14 @@
                 <br/>
                 <p>Please confirm delete department</p>
                 <input type="submit" class="btn btn-primary" value="Yes">
-                <input type="button" class="btn btn-primary" value="Cancel">
+                <input type="button" class="btn btn-secondary" value="Cancel">
             </form>
         </div>
         </tbody>
     </table>
 </div>
 
-<div id="window_dep" style="display: none" class="container mt-5">
+<div id="window_dep" style="display: none" class="window_dep container mt-5">
     <form action="" method="post">
     <div class="col-md2">
         <input type="hidden" id="dep_id" name="uuid">
@@ -53,6 +53,7 @@
             </label>
     </div>
         <input type="submit" class="btn btn-primary" value="Save">
+        <input type="button" class="btn btn-secondary" value="Cancel">
     </form>
 </div>
 
@@ -60,11 +61,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $('.btn-warning').click(function () {
-        const a = $(`#${this.dataset.id}`);
-        const dep = a.find('.department_title').text();
-        $('.add_title').val(dep);
         $('input#dep_id').val(this.dataset.id);
         $('div#window_dep').show();
+
     });
 
     $('input.btn-danger').click(function () {
@@ -73,6 +72,7 @@
     });
     $('input.btn-secondary').click(function () {
         $('div.delete_window').hide();
+        $('div.window_dep').hide();
     });
 </script>
 {% endblock %}

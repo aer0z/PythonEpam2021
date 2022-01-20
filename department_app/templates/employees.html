@@ -1,13 +1,12 @@
 {% extends 'base.html'%}
 {% block title %}Employees{% endblock %}
 {% block content%}
-<br/>
-<br/>
-<a href="{{ url_for('page.add_employee') }}" class="add_new">
-    <button type="button" class="btn btn-primary btn-lg">Add new employee</button>
-</a>
+
 <div class="container mt-5">
     <h1>Employees</h1>
+    <a href="{{ url_for('page.add_employee') }}" class="add_new">
+    <button type="button" class="btn btn-primary btn-lg">Add new employee</button>
+    </a>
     <table id="data" class="table table-striped">
         <thead>
         <tr>
@@ -45,7 +44,7 @@
         </tbody>
     </table>
 </div>
-<div id="window_emp" style="display: none" class="container mt-5">
+<div id="window_emp" style="display: none" class="window_emp container mt-5">
     <form action="" method="post" class="row g-3 needs-validation">
         <div class="col-md-2">
             <input type="hidden" id="emp_id" name="uuid">
@@ -72,6 +71,7 @@
         </div>
         <div class="col-12">
             <input type="submit" class="btn btn-primary" value="Save">
+            <input type="button" class="btn btn-secondary" value="Cancel">
         </div>
     </form>
 </div>
@@ -84,6 +84,7 @@
     });
     $('input.btn-secondary').click(function () {
         $('div.delete_window').hide();
+        $('div.window_emp').hide();
     });
     $('input.btn-warning').click(function () {
         $('input#emp_id').val(this.dataset.id);

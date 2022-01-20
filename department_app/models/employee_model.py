@@ -25,7 +25,7 @@ class Employee(db.Model):
             'uuid': self.uuid,
             'name': self.name,
             'salary': self.salary,
-            'date_of_birth': str(self.birth_date),
+            'birth_date': str(self.birth_date),
             'department_uuid': self.department_uuid,
             'age': self.age,
             'department': str(self.department)

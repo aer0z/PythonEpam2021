@@ -1,10 +1,14 @@
+"""
+Employees API
+"""
+
 from . import api
 import datetime
 from flask import request
 from flask_restful import Resource
 from sqlalchemy.exc import IntegrityError
-from department_app.service.employee_service import get_all_employees, get_one_employee, \
-    update_employee_patch, update_employee, delete_employee, add_new_employee
+from department_app.service.employee_service import get_one_employee, \
+    update_employee_patch, update_employee, delete_employee
 
 
 class EmployeeApiId(Resource):
@@ -67,7 +71,7 @@ class EmployeeApiId(Resource):
             department_uuid = request_data['department_uuid']
         except KeyError:
             return {'error': 'Wrong parameters. Note: all parameters (name,'
-                             ' salary, date_of_birth,'
+                             ' salary, birth_date,'
                              ' department_id)'
                              ' are required for PUT method.'}, 400
         except TypeError:
@@ -83,7 +87,7 @@ class EmployeeApiId(Resource):
                             name=name,
                             salary=salary,
                             birth_date=birth_date,
-                            department=department_uuid)
+                            dep=department_uuid)
         except IntegrityError:
             return {'error': 'Department with specified ID do not exist'}, 400
         return get_one_employee(emp_uuid).to_dict(), 200
