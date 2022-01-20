@@ -30,3 +30,6 @@ class Employee(db.Model):
             'age': self.age,
             'department': str(self.department)
         }
+
+    def __repr__(self):
+        return str(self.name)

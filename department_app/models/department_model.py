@@ -30,3 +30,6 @@ class Department(db.Model):
             'average_salary': average_salary,
             'number_of_employees': number_of_employees
         }
+
+    def __repr__(self):
+        return str(self.dep)

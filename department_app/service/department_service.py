@@ -56,7 +56,7 @@ def update_department(department_uuid, dep):
     """
     department = Department.query.filter_by(uuid=department_uuid).first_or_404(
         description='Not found. Entry with specified ID is missing.')
-    department.dep= dep
+    department.dep = dep
     db.session.add(department)
     db.session.commit()
 

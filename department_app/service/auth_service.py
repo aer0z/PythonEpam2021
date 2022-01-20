@@ -35,4 +35,4 @@ def email_exists(email):
     :return: If email exist return True else False
     '''
     user = User.query.filter_by(email=email).first()
-    return user
+    return bool(user)
