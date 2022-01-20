@@ -23,7 +23,7 @@
         {% for employee in employees %}
         <tr>
             <td>{{ employee.name }}</td>
-            <td>{{ employee.department.department}}</td>
+            <td>{{ employee.department.dep}}</td>
             <td>{{ employee.salary }}</td>
             <td>{{ employee.age }}</td>
             <td>{{ employee.birth_date}}</td>
@@ -60,14 +60,14 @@
             <input name="salary" type="text" class="form-control" placeholder="15000" required>
         </div>
         <div class="col-md-2">
-            <label class="form-select">Department: <select name="department">
+            <label class="form-select">Department: <select name="dep">
                 {% for department in departments %}
-                <option value="{{ department.uuid }}">{{ department.department }}</option>
+                <option value="{{ department.uuid }}">{{ department.dep }}</option>
                 {% endfor %}
-            </select></label></p>
+            </select></label>
         </div>
         <div class="col-md-2">
-            <label>Birthday: <input type="date" id="birthday" class="form-control"
+            <label>Birthday: <input type="date" id="birth_date" class="form-control"
                                     name="birth_date"></label>
         </div>
         <div class="col-12">

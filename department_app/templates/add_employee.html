@@ -14,7 +14,7 @@
             <select name="department" class="form-select" required>
                 <option selected disabled value="">Choose department</option>
                 {% for department in departments %}
-                    <option value="{{ department.uuid }}">{{ department.department}}</option>
+                    <option value="{{ department.uuid }}">{{ department.dep}}</option>
                 {% endfor %}
             </select>
             <div class="invalid-feedback">

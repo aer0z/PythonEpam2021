@@ -17,8 +17,8 @@ def departments_page():
     """
     if request.method == 'POST':
         department_id = request.form['uuid']
-        department = request.form['name']
-        department_service.update_department(department_id, department)
+        dep = request.form['dep']
+        department_service.update_department(department_id, dep)
     return render_template('departments.html', departments=department_service.get_all_departments(), user=current_user)
 
 
@@ -30,8 +30,8 @@ def add_department():
     :return: render page
     """
     if request.method == 'POST':
-        department = request.form['department']
-        department_service.add_new_department(department)
+        dep = request.form['dep']
+        department_service.add_new_department(dep)
         return redirect(url_for('page.departments_page'))
     return render_template('add_department.html', user=current_user)
 

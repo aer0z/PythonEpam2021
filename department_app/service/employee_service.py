@@ -35,21 +35,21 @@ def get_one_employee(emp_uuid):
     return employee
 
 
-def update_employee(emp_uuid, name, salary, birth_date, department):
+def update_employee(emp_uuid, name, salary, birth_date, dep):
     """
      Change existing employee entry.
     :param emp_uuid: uuid of employee
     :param name: name of employee
     :param salary: salary of employee
     :param birth_date: birthday of employee
-    :param department: uuid of employees department
+    :param dep: uuid of employees department
     """
     employee = Employee.query.filter_by(uuid=emp_uuid).first_or_404(
         description='Not found. Entry with specified ID is missing.')
     employee.name = name
     employee.salary = salary
     employee.birth_date = birth_date
-    employee.department_uuid = department
+    employee.department_uuid = dep
     db.session.add(employee)
     db.session.commit()
 
@@ -74,9 +74,6 @@ def add_new_employee(name, salary, birth_date, department):
     born = emp.birth_date
     emp.age = today.year - born.year - ((today.month, today.day) < (born.month, born.day))
     return emp
-
-
-
 
 
 def delete_employee(emp_uuid):

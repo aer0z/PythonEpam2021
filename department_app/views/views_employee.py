@@ -23,12 +23,12 @@ def employees(dep_uuid):
         name = request.form['name']
         birth_date = request.form['birth_date']
         salary = request.form['salary']
-        department = request.form['department']
+        dep = request.form['dep']
         employee_service.update_employee(emp_uuid=uuid,
                                          name=name,
                                          salary=salary,
                                          birth_date=birth_date,
-                                         department=department)
+                                         dep=dep)
     deps = get_all_departments()
     employees_list = employee_service.get_all_employees()
     return render_template('employees.html', employees=employees_list, departments=deps, user=current_user)

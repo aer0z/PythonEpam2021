@@ -21,19 +21,34 @@ def get_all_departments():
     return departments
 
 
+def get_one_department(dep_uuid):
+    """
+    Select data by id form Departments table.
+    :param dep_uuid: uuid of department
+    :return: department object
+    """
+    department = Department.query.filter_by(uuid=dep_uuid).first_or_404(
+        description='Not found. Entry with specified ID is missing.')
+    salary = get_average_salary(department.uuid)
+    number_of_employees = get_number_of_employees(department.uuid)
+    department.average_salary = float(salary) if salary else 0
+    department.number_of_employees = number_of_employees
+    return department
+
+
 def add_new_department(name):
     """
     Add new department to db
     :param name: department name
     :return: last department query
     """
-    department = Department(department=name)
+    department = Department(dep=name)
     db.session.add(department)
     db.session.commit()
     return db.session.query(Department).order_by(Department.id.desc()).first()
 
 
-def update_department(department_uuid, name):
+def update_department(department_uuid, dep):
     """
     Change existing entry in department table.
     :param department_uuid: uuid of department
@@ -41,7 +56,7 @@ def update_department(department_uuid, name):
     """
     department = Department.query.filter_by(uuid=department_uuid).first_or_404(
         description='Not found. Entry with specified ID is missing.')
-    department.name = name
+    department.dep= dep
     db.session.add(department)
     db.session.commit()
 
@@ -74,3 +89,18 @@ def get_number_of_employees(department_uuid):
     :return: number of employees
     """
     return db.session.query(Employee).filter_by(department_uuid=department_uuid).count()
+
+
+def update_department_patch(department_uuid, *, dep=None):
+    """
+    Change existing department entry in without overwriting unspecified fields with None.
+    :param department_uuid: uuid of department
+    :param name: department name
+    :param description: department description
+    """
+    department = Department.query.filter_by(uuid=department_uuid).first_or_404(
+        description='Not found. Entry with specified ID is missing.')
+    if dep:
+        department.dep = dep
+    db.session.add(department)
+    db.session.commit()
