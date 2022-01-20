@@ -19,8 +19,8 @@
         <tbody>
         {% for department in departments %}
         <tr>
-            <td>
-                <div class='department_title'>{{ department.dep }}</div>
+            <td class='department_title'>
+                {{ department.dep }}
             </td>
             <td>{{ department.average_salary }}</td>
             <td>{{ department.number_of_employees }}</td>
@@ -43,15 +43,16 @@
     </table>
 </div>
 
-<div id="window_dep" style="display: none">
+<div id="window_dep" style="display: none" class="container mt-5">
     <form action="" method="post">
+    <div class="col-md2">
         <input type="hidden" id="dep_id" name="uuid">
-        <p>
-            <label class="add_department_title">Department name
-                <input type="text" class="add_title" name="dep">
+
+            <label class="form_label">Department name
+                <input type="text" class="add_title " name="dep">
             </label>
-        </p>
-        <input type="submit" class="save" value="Save">
+    </div>
+        <input type="submit" class="btn btn-primary" value="Save">
     </form>
 </div>
 
